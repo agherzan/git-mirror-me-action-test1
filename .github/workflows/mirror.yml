@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: Andrei Gherzan <andrei.gherzan@huawei.com>
+#
+# SPDX-License-Identifier: MIT
+
+name: Git Mirrors
+
+on: [ push, delete, create ]
+
+concurrency:
+  group: git-mirror-me
+
+jobs:
+  yocto-mirror:
+    name: Yocto Git Mirror
+    runs-on: [self-hosted, Linux]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - uses: agherzan/git-mirror-me-action@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        with:
+          destination-repository: "git@github.com:agherzan/git-mirror-me-action-test2.git"
