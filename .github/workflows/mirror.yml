@@ -14,7 +14,7 @@ jobs:
     name: Yocto Git Mirror
     runs-on: [self-hosted, Linux]
     steps:
-      - uses: agherzan/git-mirror-me-action@v2.0.1
+      - uses: agherzan/git-mirror-me-action@9b601dab4301f9fbc395208b165444d84605f452
         with:
           destination-repository: "git@push.yoctoproject.org:meta-raspberrypi"
           debug: "true"
